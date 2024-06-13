@@ -1,0 +1,16 @@
+@can('$MODEL_NAME_PLURAL_SNAKE$.read')
+    <a href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.show', $$PRIMARY_KEY_NAME$) }}" class='btn btn-sm btn-info'>
+        <i class="fa fa-eye"></i>
+    </a>
+@endcan
+@can('$MODEL_NAME_PLURAL_SNAKE$.update')
+    <a href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.edit', $$PRIMARY_KEY_NAME$) }}" class='btn btn-sm btn-primary'>
+        <i class="fa fa-edit"></i>
+    </a>
+@endcan
+@can('$MODEL_NAME_PLURAL_SNAKE$.delete')
+    {!! Form::open(['route' => ['$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.destroy', $$PRIMARY_KEY_NAME$], 'method' => 'DELETE', 'class'=>'form-delete', 'style' => 'display: inline']) !!}
+    <a type="submit" href="{{route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.destroy',$$PRIMARY_KEY_NAME$)}}" class="btn btn-sm btn-danger btn-delete"><i class="fa fa-trash"></i></a>
+    {!! Form::close() !!}
+@endcan
+

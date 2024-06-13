@@ -1,0 +1,26 @@
+@extends('layouts.app')
+@section('content')
+    <div class="card shadow mb-4">
+        <div class="card-header ">
+            <div class="row">
+                <div class="col-3">
+                    <h6 class="m-0 font-weight-bold text-primary">$MODEL_NAME_PLURAL_HUMAN$</h6>
+                </div>
+                <div class="col-9">
+                    @can('$MODEL_NAME_PLURAL_SNAKE$.create')
+                        <a class="btn btn-success fa-pull-right" href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.create') }}">
+                            Add New
+                        </a>
+                    @endcan
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.table')
+            </div>
+        </div>
+    </div>
+@endsection
+
+

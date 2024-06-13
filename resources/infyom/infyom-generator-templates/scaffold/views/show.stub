@@ -1,0 +1,14 @@
+@extends('layouts.app')
+@section('content')
+    <div class="card">
+        <div class="card-header">
+            Show $MODEL_NAME_HUMAN$
+        </div>
+        <div class="card-body">
+            <div class="row mb-2">
+                @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.show_fields')
+            </div>
+            <a href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index') }}" class="btn btn-default">Back</a>
+        </div>
+    </div>
+@endsection

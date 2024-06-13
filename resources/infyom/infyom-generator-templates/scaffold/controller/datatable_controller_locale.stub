@@ -1,0 +1,128 @@
+<?php
+
+namespace $NAMESPACE_CONTROLLER$;
+
+use $NAMESPACE_DATATABLES$\$MODEL_NAME$DataTable;
+use $NAMESPACE_REQUEST$;
+use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
+use $NAMESPACE_REQUEST$\Update$MODEL_NAME$Request;
+use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
+//use Flash;
+use Illuminate\Support\Facades\Gate;
+use $NAMESPACE_APP$\Http\Controllers\AppBaseController;
+use Response;
+
+class $MODEL_NAME$Controller extends AppBaseController
+{
+    /** @var  $MODEL_NAME$Repository */
+    private $$MODEL_NAME_CAMEL$Repository;
+
+    public function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
+    {
+        $this->$MODEL_NAME_CAMEL$Repository = $$MODEL_NAME_CAMEL$Repo;
+    }
+
+    /**
+     * Display a listing of the $MODEL_NAME$.
+     *
+     * @param $MODEL_NAME$DataTable $$MODEL_NAME_CAMEL$DataTable
+     * @return Response
+     */
+    public function index($MODEL_NAME$DataTable $$MODEL_NAME_CAMEL$DataTable)
+    {
+        Gate::authorize('$MODEL_NAME_PLURAL_SNAKE$.read');
+        return $$MODEL_NAME_CAMEL$DataTable->render('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.index');
+    }
+
+    /**
+     * Show the form for creating a new $MODEL_NAME$.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        Gate::authorize('$MODEL_NAME_PLURAL_SNAKE$.create');
+        return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.create');
+    }
+
+    /**
+     * Store a newly created $MODEL_NAME$ in storage.
+     *
+     * @param Create$MODEL_NAME$Request $request
+     *
+     * @return Response
+     */
+    public function store(Create$MODEL_NAME$Request $request)
+    {
+        Gate::authorize('$MODEL_NAME_PLURAL_SNAKE$.create');
+        $input = $request->all();
+
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
+
+        return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'))->withSuccess(__('messages.saved', ['model' => __('models/$MODEL_NAME_PLURAL_CAMEL$.singular')]));
+    }
+
+    /**
+     * Display the specified $MODEL_NAME$.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        Gate::authorize('$MODEL_NAME_PLURAL_SNAKE$.read');
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findOrFail($id);
+
+        return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.show')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
+    }
+
+    /**
+     * Show the form for editing the specified $MODEL_NAME$.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        Gate::authorize('$MODEL_NAME_PLURAL_SNAKE$.update');
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findOrFail($id);
+
+        return view('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.edit')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
+    }
+
+    /**
+     * Update the specified $MODEL_NAME$ in storage.
+     *
+     * @param  int              $id
+     * @param Update$MODEL_NAME$Request $request
+     *
+     * @return Response
+     */
+    public function update($id, Update$MODEL_NAME$Request $request)
+    {
+        Gate::authorize('$MODEL_NAME_PLURAL_SNAKE$.update');
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findOrFail($id);
+
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($request->all(), $id);
+
+        return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'))->withSuccess(__('messages.updated', ['model' => __('models/$MODEL_NAME_PLURAL_CAMEL$.singular')]));
+    }
+
+    /**
+     * Remove the specified $MODEL_NAME$ from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        Gate::authorize('$MODEL_NAME_PLURAL_SNAKE$.delete');
+        $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->findOrFail($id);
+
+        $this->$MODEL_NAME_CAMEL$Repository->delete($id);
+        return redirect(route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index'))->withSuccess(__('messages.deleted', ['model' => __('models/$MODEL_NAME_PLURAL_CAMEL$.singular')]));
+    }
+}

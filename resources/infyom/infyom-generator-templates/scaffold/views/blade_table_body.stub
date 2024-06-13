@@ -1,0 +1,39 @@
+<div class="col-12 col-md-4 offset-md-8" style="margin-bottom: 20px">
+    <form method="GET" action="{{route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index')}}">
+        <div class="input-group m-0">
+            <input name="search" type="text" class="form-control bg-light border-0 small" value="{{request()->search}}" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search fa-sm"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="col-12 table-responsive">
+    <table class="table" id="$MODEL_NAME_PLURAL_CAMEL$-table">
+        <thead>
+            <tr>
+                $FIELD_HEADERS$
+                <th colspan="3">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
+            <tr>
+                $FIELD_BODY$
+                <td>
+                    @can('$MODEL_NAME_PLURAL_SNAKE$.delete'){!! Form::open(['route' => ['$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.destroy', $$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$], 'method' => 'delete']) !!}@endcan
+                        @can('$MODEL_NAME_PLURAL_SNAKE$.read')<a href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.show', [$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$]) }}" class='btn btn-sm btn-info'><i class="fa fa-eye"></i></a>@endcan
+                        @can('$MODEL_NAME_PLURAL_SNAKE$.update')<a href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$]) }}" class='btn btn-sm btn-primary'><i class="fa fa-edit"></i></a>@endcan
+                        @can('$MODEL_NAME_PLURAL_SNAKE$.delete'){!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Are you sure?')"]) !!}@endcan
+                    @can('$MODEL_NAME_PLURAL_SNAKE$.delete'){!! Form::close() !!}@endcan
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <div class="text-center fa-pull-right">
+        <div class="col-12">
+            {!! $$MODEL_NAME_PLURAL_CAMEL$->withQueryString()->links() !!}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+@can('$MODEL_NAME_PLURAL_SNAKE$.read')
+    <li class="nav-item {{ Nav::isRoute('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.*') }}">
+        <a class="nav-link" href="{{ route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.index') }}">
+            <i class="fas fa-fw fa-edit"></i>
+            <span>$MODEL_NAME_PLURAL_HUMAN$</span>
+        </a>
+    </li>
+@endcan
+
